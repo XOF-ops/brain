@@ -1,0 +1,4 @@
+[tool.ruff]
+line-length = 88
+exclude = [".git", "build", "dist", "venv"]
+# You can adjust "select" to the categories you want enforced. Ruff defaults are OK.
