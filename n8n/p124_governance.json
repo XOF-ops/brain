@@ -1,0 +1,30 @@
+{
+  "name": "P124 Governance Loop - Minimal",
+  "nodes": [
+    {
+      "id": "masterbrain_scan",
+      "name": "Master Brain Scan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "parameters": {"url": "http://localhost:1111/analyze", "method": "POST", "responseFormat": "json", "jsonParameters": false, "bodyParameters": {"parameters": [{"name": "payload", "value": "={{ $json.payload }}"}]}}
+    },
+    {
+      "id": "if_proposals",
+      "name": "If Proposals",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [520, 300],
+      "parameters": {"conditions": {"number": [{"value1": "={{ $json.governance_proposals && $json.governance_proposals.length }}", "operation": "isGreaterThan", "value2": 0}]}}
+    },
+    {
+      "id": "post_amend",
+      "name": "Post /amend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [820, 220],
+      "parameters": {"url": "http://localhost:5000/amend", "method": "POST", "responseFormat": "json", "jsonParameters": false, "bodyParameters": {"parameters": [{"name": "proposal", "value": "={{ $json.governance_proposals[0] }}"}]}}
+    }
+  ],
+  "connections": {"masterbrain_scan": {"main": [[{"node": "if_proposals", "type": "main", "index": 0}]]}, "if_proposals": {"main": [[{"node": "post_amend", "type": "main", "index": 0}]]}}
+}

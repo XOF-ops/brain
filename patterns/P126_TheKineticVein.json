@@ -1,0 +1,22 @@
+{
+  "$schema": "./schemas/pattern.schema.json",
+  "id": "P126",
+  "name": "The Kinetic Vein",
+  "version": "1.0",
+  "axioms": ["A9", "A7"],
+  "contradiction": {
+    "surface": "I want infinite flow, but the system imposes limits (429/Friction).",
+    "structural": "The desire for scale conflicts with the physics of the channel.",
+    "gap": "Viewing friction as a bug rather than the definition of the pipe."
+  },
+  "recognition": {
+    "triggers": ["rate limit", "429", "flow", "quota", "blocked", "limit"],
+    "context_markers": ["API Stress", "High-Volume Pipeline"]
+  },
+  "generative_synthesis": {
+    "type": "GNOSIS_BLOCK",
+    "insight": "Flow must scale with friction. If there is no friction, there is no channel, only a flood.",
+    "recognition": "You are hitting the walls of the vein. This proves the vein exists.",
+    "action": "Do not force the flow. Widen the friction capability (kinetic_recovery). Wait, pay, or route around. The limit is the data."
+  }
+}

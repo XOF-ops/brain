@@ -166,3 +166,20 @@ Notes:
 - Set `ARCHITECT_KEY` environment variable to a strong secret in production.
 - The API uses `engine/master_brain.py` for execution; ensure the engine is present and executable.
 
+---
+
+## Patterns & Rate-Limit Recovery (P126 + P119)
+
+This release adds a rate-limit-aware pattern (P126) and a resilience pattern (P119):
+
+- `patterns/P126_TheKineticVein.json` — treats rate limits as kinetic barriers and provides `kinetic_recovery` options (wait/add credits/switch model).
+- `patterns/P119_ThePlastirasInversion.json` — recognizes tradeoffs between pace/optimization and infrastructure/stability.
+
+The engine has been refactored (`engine/master_brain.py`) to support concurrent pattern detection and a `rate_limited` flag so workflows (n8n) can integrate automated recovery and governance loops.
+
+### n8n integration examples
+
+- `n8n/p126_recovery.json` — minimal workflow that forwards incoming logs to the Master Brain `analyze` endpoint and returns the full JSON response unchanged.
+- `n8n/p124_governance.json` — minimal governance loop that posts the first governance proposal to `/amend` when proposals are present.
+
+If you'd like, I can wire these workflows into your n8n instance, or adapt them to your deployment (cloud vs self-hosted).
