@@ -128,3 +128,41 @@ A small webhook service forwards incoming POST requests to the Master Brain `/sc
 Use `MASTER_BRAIN_URL` to point at your ngrok/external Master Brain if needed (for example, `https://trinitymasterbrain.app.n8n.cloud`).
 
 Environment variables: `MASTER_BRAIN_URL`, `MASTER_BRAIN_TIMEOUT`, `PORT`.
+
+---
+
+## Architect's Manual (API Activation) 🏛️
+
+To bring the Amendment Flow online:
+
+1. Install Flask:
+
+   ```bash
+   pip install flask
+   ```
+
+2. Start the Engine API (runs on port 5000 by default):
+
+   ```bash
+   python3 engine/api.py
+   ```
+
+3. Configure n8n Credential:
+   - Create a new Credential in n8n of type **Header Auth**.
+   - Name: `Authorization`
+   - Value: `Bearer ARCHITECT_KEY` (set `ARCHITECT_KEY` in the API environment or override the value)
+
+4. Execute the Loop:
+   - When Gnosis detects "Fear", it outputs a proposal.
+   - n8n POSTs to `http://localhost:5000/amend` with JSON:
+
+     ```json
+     { "proposal": "A12: Flow must scale with friction" }
+     ```
+
+   - The API validates the key (The Bond) and executes the Engine (The Action). On success Layer 3 is updated.
+
+Notes:
+- Set `ARCHITECT_KEY` environment variable to a strong secret in production.
+- The API uses `engine/master_brain.py` for execution; ensure the engine is present and executable.
+
