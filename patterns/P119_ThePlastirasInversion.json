@@ -1,0 +1,22 @@
+{
+  "$schema": "./schemas/pattern.schema.json",
+  "id": "P119",
+  "name": "The Plastiras Inversion (The Dam)",
+  "version": "1.1",
+  "axioms": ["A6", "A7"],
+  "contradiction": {
+    "surface": "I need to lead, but leading requires control, and control destroys agency.",
+    "structural": "Efficiency (Flow) vs. Survival (Reservoir).",
+    "gap": "Mistaking optimization for leadership."
+  },
+  "recognition": {
+    "triggers": ["optimize", "pace", "flexible", "maintain"],
+    "context_markers": ["Institutional Crisis", "Rapid Growth"]
+  },
+  "generative_synthesis": {
+    "type": "GNOSIS_BLOCK",
+    "insight": "The leader builds the Dam.",
+    "recognition": "You are micromanaging flow instead of building infrastructure.",
+    "action": "Build the Dam. Sacrifice speed for stability."
+  }
+}
